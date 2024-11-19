@@ -2,6 +2,7 @@ package repl
 
 import (
 	"bufio"
+	"flare/evaluator"
 	"flare/lexer"
 	"flare/parser"
 	"fmt"
@@ -36,8 +37,11 @@ func Start(in io.Reader, out io.Writer) {
 			continue
 		}
 
-		io.WriteString(out, program.String())
-		io.WriteString(out, "\n")
+		evaluated := evaluator.Eval(program)
+		if evaluated != nil {
+			io.WriteString(out, evaluated.Inspect())
+			io.WriteString(out, "\n")
+		}
 	}
 }
 

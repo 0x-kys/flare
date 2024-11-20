@@ -93,6 +93,12 @@ type CallExpression struct {
 	Arguments []Expression
 }
 
+type FunctionalLiteral struct {
+	Token      token.Token
+	Parameters []*Identifier
+	Body       *BlockStatement
+}
+
 func (ls *LetStatement) statementNode()       {}
 func (ls *LetStatement) TokenLiteral() string { return ls.Token.Literal }
 
